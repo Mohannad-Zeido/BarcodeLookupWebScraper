@@ -11,10 +11,7 @@ from Model.product import ProductEncoder
 def get_product_from_website(barcode):
 
     chrome_options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(
-        options=chrome_options
-    )
-
+    driver = webdriver.Remote(options=chrome_options)
     url = "https://www.barcodelookup.com/" + barcode
     print(url)
     try:
@@ -39,10 +36,9 @@ def get_product_from_website(barcode):
     image_src = image_div.find('img').get('src')
 
     product_details = section.find('div', attrs={'class': "product-details"})
-
     product_name = product_details.find('h4').text.strip()
-    product_text_labels = product_details.find_all('div', attrs={'class': "product-text-label"})
 
+    product_text_labels = product_details.find_all('div', attrs={'class': "product-text-label"})
     category = ""
     for pl in product_text_labels:
         if "category" in pl.text.lower():
